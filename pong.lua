@@ -74,16 +74,19 @@ function Ball:init()
 end
 
 function Ball:move()
-	self.x = self.x + self.vx
-	self.y = self.y + self.vy
+	newrect = Rect:new(self.rect)
+	newrect.x = newrect.x + self.vx
+	newrect.y = newrect.y + self.vy
 
 	for _, paddle in pairs(paddles) do
-		if paddle.rect:intersects(self.rect) then
-			print("richochet")
+		if paddle.rect:intersects(newrect) then
 			self.vx = self.vx * -1.0
 			self.vy = self.vy * -1.0
 		end
 	end
+
+	self.x = self.x + self.vx
+	self.y = self.y + self.vy
 end
 
 function Ball:draw()
