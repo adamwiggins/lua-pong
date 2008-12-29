@@ -19,9 +19,7 @@ function Paddle:new(o)
 	o = o or {}
 	setmetatable(o, self)
 	self.__index = self
-
 	o:init()
-
 	return o
 end
 
@@ -52,12 +50,43 @@ end
 
 ---------------------------
 
+Ball = {x = 0, y = 0, vx = 0.0, vy = 0.0}
+
+function Ball:new(o)
+	o = o or {}
+	setmetatable(o, self)
+	self.__index = self
+	o:init()
+	return o
+end
+
+function Ball:init()
+	self.rect = Rect:new{x = x, y = y, width = 0.03, height = 0.03, red = 1.0, green = 0.0, blue = 0.0}
+end
+
+function Ball:move()
+	self.x = self.x + self.vx
+	self.y = self.y + self.vy
+end
+
+function Ball:draw()
+	self.rect.x = self.x
+	self.rect.y = self.y
+	self.rect:draw()
+end
+
+---------------------------
+
 paddles = { Paddle:new{side=1}, Paddle:new{side=2} }
+ball = Ball:new{x = 0.0, y = 0.0, vx = -0.003, vy = 0.003}
 
 function pulse()
 	for _, paddle in pairs(paddles) do
 		paddle:move()
 		paddle:draw()
 	end
+
+	ball:move()
+	ball:draw()
 end
 
