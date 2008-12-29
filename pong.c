@@ -21,7 +21,6 @@ static int draw_rectangle(lua_State *L)
 	float green = lua_tonumber(L, 6);
 	float blue = lua_tonumber(L, 7);
 
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 	glTranslatef(x, y, 0.0f);
 	glBegin(GL_QUADS);
@@ -125,6 +124,7 @@ int main(int argc, char*argv[])
 					break;
 			}
 
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		pulse_via_lua();
 		SDL_GL_SwapBuffers();
 		SDL_Delay(10);
