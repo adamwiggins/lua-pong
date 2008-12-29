@@ -1,4 +1,4 @@
-Rect = {x = 0, y = 0}
+Rect = {x = 0, y = 0, width = 0.3, height = 0.3}
 
 function Rect:new(o)
 	o = o or {}
@@ -8,7 +8,7 @@ function Rect:new(o)
 end
 
 function Rect:draw()
-	draw_rectangle(self.x, self.y, 50, 200)
+	draw_rectangle(self.x, self.y, self.width, self.height)
 end
 
 function Rect:move()
@@ -18,7 +18,7 @@ function Rect:move()
 	if left_pressed()  then self.x = self.x - 0.01 end
 end
 
-rect = Rect:new{x = -0.5, y = -0.5}
+rect = Rect:new{x = -0.5, y = -0.5, width=0.2, height=0.5}
 
 function pulse()
 	rect:move()

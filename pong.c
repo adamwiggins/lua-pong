@@ -13,6 +13,8 @@ static int draw_rectangle(lua_State *L)
 {
 	float x = lua_tonumber(L, 1);
 	float y = lua_tonumber(L, 2);
+	float width = lua_tonumber(L, 3);
+	float height = lua_tonumber(L, 4);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
@@ -20,10 +22,10 @@ static int draw_rectangle(lua_State *L)
 	glBegin(GL_QUADS);
 	glColor3f(0.0f, 0.0f, 1.0f);
 	glVertex2f(0.0f, 0.0f);
-	glVertex2f(1.0f, 0.0f);
+	glVertex2f(width, 0.0f);
 	glColor3f(0.0f, 0.0f, 0.3f);
-	glVertex2f(1.0f, 1.0f);
-	glVertex2f(0.0f, 1.0f);
+	glVertex2f(width, height);
+	glVertex2f(0.0f, height);
 	glEnd();
 
 	SDL_GL_SwapBuffers();
