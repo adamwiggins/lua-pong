@@ -2,6 +2,10 @@
 #include <OpenGL/gl.h>
 #include <lua.h>
 
+#define bool int
+#define false 0
+#define true 1
+
 lua_State *L;
 
 static int draw_rectangle(lua_State *L)
@@ -14,11 +18,11 @@ static int draw_rectangle(lua_State *L)
 	glTranslatef(0.0f,0.0f,0.0f);
 	glRotatef(theta, 0.0f, 0.0f, 1.0f);
 	glBegin(GL_TRIANGLES);
-	glColor3f(1.0f, 0.0f, 0.0f);
-	glVertex2f(0.0f, 1.0f);
-	glColor3f(0.0f, 1.0f, 0.0f);
-	glVertex2f(0.87f, -0.5f);
 	glColor3f(0.0f, 0.0f, 1.0f);
+	glVertex2f(0.0f, 1.0f);
+//	glColor3f(0.0f, 1.0f, 0.0f);
+	glVertex2f(0.87f, -0.5f);
+//	glColor3f(0.0f, 0.0f, 1.0f);
 	glVertex2f(-0.87f, -0.5f);
 	glEnd();
 
@@ -68,8 +72,27 @@ int main(int argc, char*argv[])
 		exit(1);
 	}
 
-	while (1)
+	bool done = false;
+	while (!done)
 	{
+		SDL_Event event;
+		SDL_keysym key;
+		while (SDL_PollEvent(&event) && !done)
+			switch (event.type)
+			{
+				case SDL_KEYDOWN:
+					key = event.key.keysym;
+					switch (key.sym)
+					{
+						case SDLK_ESCAPE: done = true; break;
+					}
+					break;
+
+				case SDL_QUIT:
+					done = true;
+					break;
+			}
+
 		pulse_via_lua();
 		SDL_GL_SwapBuffers();
 		SDL_Delay(10);
