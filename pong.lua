@@ -56,6 +56,9 @@ function Paddle:move()
 	if self.side == 1 then
 		if up_pressed()    then self.y = self.y + 0.01 end
 		if down_pressed()  then self.y = self.y - 0.01 end
+	else
+		if self.y < ball.y then self.y = self.y + 0.01 end
+		if self.y > ball.y then self.y = self.y - 0.01 end
 	end
 end
 
@@ -82,8 +85,8 @@ function Ball:move()
 
 	for _, paddle in pairs(paddles) do
 		if paddle.rect:intersects(newrect) then
-			self.vx = self.vx * -1.0 + math.random(-0.3, 0.3)
-			self.vy = self.vy * -1.0 + math.random(-0.3, 0.3)
+			self.vx = self.vx * (-1.0 + math.random(-5, 5) * 0.1)
+			self.vy = self.vy * (-1.0 + math.random(-5, 5) * 0.1)
 		end
 	end
 
@@ -100,7 +103,7 @@ end
 ---------------------------
 
 paddles = { Paddle:new{side=1}, Paddle:new{side=2} }
-ball = Ball:new{x = 0.0, y = 0.0, vx = -0.003, vy = 0.003}
+ball = Ball:new{x = 0.0, y = 0.0, vx = -0.005, vy = 0.005}
 
 function pulse()
 	for _, paddle in pairs(paddles) do
