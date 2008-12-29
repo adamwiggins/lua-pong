@@ -1,3 +1,5 @@
+math.randomseed(os.time())
+
 Rect = {x = 0, y = 0, width = 0.3, height = 0.3, red = 0.0, green = 1.0, blue = 0.0}
 
 function Rect:new(o)
@@ -80,8 +82,8 @@ function Ball:move()
 
 	for _, paddle in pairs(paddles) do
 		if paddle.rect:intersects(newrect) then
-			self.vx = self.vx * -1.0
-			self.vy = self.vy * -1.0
+			self.vx = self.vx * -1.0 + math.random(-0.3, 0.3)
+			self.vy = self.vy * -1.0 + math.random(-0.3, 0.3)
 		end
 	end
 
