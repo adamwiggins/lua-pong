@@ -1,4 +1,4 @@
-Rect = {x = 0, y = 0, width = 0.3, height = 0.3}
+Rect = {x = 0, y = 0, width = 0.3, height = 0.3, red = 0.0, green = 1.0, blue = 0.0}
 
 function Rect:new(o)
 	o = o or {}
@@ -8,7 +8,7 @@ function Rect:new(o)
 end
 
 function Rect:draw()
-	draw_rectangle(self.x, self.y, self.width, self.height)
+	draw_rectangle(self.x, self.y, self.width, self.height, self.red, self.green, self.blue)
 end
 
 function Rect:move()

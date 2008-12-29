@@ -7,6 +7,8 @@
 #define false 0
 #define true 1
 
+#define max(a, b) (a < b ? b : a)
+
 lua_State *L;
 
 static int draw_rectangle(lua_State *L)
@@ -15,15 +17,18 @@ static int draw_rectangle(lua_State *L)
 	float y = lua_tonumber(L, 2);
 	float width = lua_tonumber(L, 3);
 	float height = lua_tonumber(L, 4);
+	float red = lua_tonumber(L, 5);
+	float green = lua_tonumber(L, 6);
+	float blue = lua_tonumber(L, 7);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 	glTranslatef(x, y, 0.0f);
 	glBegin(GL_QUADS);
-	glColor3f(0.0f, 0.0f, 1.0f);
+	glColor3f(red, green, blue);
 	glVertex2f(0.0f, 0.0f);
 	glVertex2f(width, 0.0f);
-	glColor3f(0.0f, 0.0f, 0.3f);
+	glColor3f(max(0, red - 0.7), max(0, green - 0.7), max(0, blue - 0.7));
 	glVertex2f(width, height);
 	glVertex2f(0.0f, height);
 	glEnd();
