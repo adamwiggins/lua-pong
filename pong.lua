@@ -20,18 +20,22 @@ function Paddle:new(o)
 	setmetatable(o, self)
 	self.__index = self
 
-	o.rect = Rect:new{y = y, width = 0.05, height = 0.3}
-
-	if o.side == 1 then
-		o.rect.x = -0.9
-		o.rect.green = 1.0
-	else
-		o.rect.x = 0.9
-		o.rect.green = 0.0
-		o.rect.blue = 1.0
-	end
+	o:init()
 
 	return o
+end
+
+function Paddle:init()
+	self.rect = Rect:new{y = y, width = 0.05, height = 0.3}
+
+	if self.side == 1 then
+		self.rect.x = -0.9
+		self.rect.green = 1.0
+	else
+		self.rect.x = 0.9
+		self.rect.green = 0.0
+		self.rect.blue = 1.0
+	end
 end
 
 function Paddle:draw()
