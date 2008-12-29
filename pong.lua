@@ -11,6 +11,15 @@ function Rect:draw()
 	draw_rectangle(self.x, self.y, self.width, self.height, self.red, self.green, self.blue)
 end
 
+function Rect:intersects(other)
+	if math.abs(self.x - other.x) < (self.width + other.width) and
+	   math.abs(self.y - other.y) < (self.height + other.height) then
+		return true
+	else
+		return false
+	end
+end
+
 ---------------------------
 
 Paddle = {y = 0, side = 1}
@@ -67,6 +76,14 @@ end
 function Ball:move()
 	self.x = self.x + self.vx
 	self.y = self.y + self.vy
+
+	for _, paddle in pairs(paddles) do
+		if paddle.rect:intersects(self.rect) then
+			print("richochet")
+			self.vx = self.vx * -1.0
+			self.vy = self.vy * -1.0
+		end
+	end
 end
 
 function Ball:draw()
