@@ -102,6 +102,27 @@ end
 
 ---------------------------
 
+function all_tests()
+	print("== Running tests")
+
+	r1 = Rect:new{x = 0, y = 0, w = 3, h = 1}
+	r2 = Rect:new{x = 1, y = 0, w = 2, h = 2}
+	r3 = Rect:new{x = 4, y = 0, w = 2, h = 2}
+
+	if r1:intersects(r2) == false then
+		print("! Expected r1 to intersect r2")
+	end
+
+	if r1:intersects(r3) == true then
+		print("! Expected r1 not to intersect r3")
+	end
+
+	print("Done.")
+	return true
+end
+
+---------------------------
+
 paddles = { Paddle:new{side=1}, Paddle:new{side=2} }
 ball = Ball:new{x = 0.0, y = 0.0, vx = -0.005, vy = 0.005}
 
