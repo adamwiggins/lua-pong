@@ -102,23 +102,34 @@ end
 
 ---------------------------
 
+function describe(class, func)
+	print(class)
+	func()
+	print()
+end
+
+function it(descr, func)
+	if (func()) then
+		print("- ", descr)
+	else
+		print("[fail] ", descr)
+	end
+end
+
 function all_tests()
-	print("== Running tests")
+	describe("Rect", function()
+		r1 = Rect:new{x = 0, y = 0, w = 3, h = 1}
+		r2 = Rect:new{x = 1, y = 0, w = 2, h = 2}
+		r3 = Rect:new{x = 4, y = 0, w = 2, h = 2}
 
-	r1 = Rect:new{x = 0, y = 0, w = 3, h = 1}
-	r2 = Rect:new{x = 1, y = 0, w = 2, h = 2}
-	r3 = Rect:new{x = 4, y = 0, w = 2, h = 2}
+		it("intersects two rectangles", function()
+			return r1:intersects(r2) == true
+		end)
 
-	if r1:intersects(r2) == false then
-		print("! Expected r1 to intersect r2")
-	end
-
-	if r1:intersects(r3) == true then
-		print("! Expected r1 not to intersect r3")
-	end
-
-	print("Done.")
-	return true
+		it("doesn't intersect non-intersecting rectangles", function()
+			return r1:intersects(r3) == false
+		end)
+	end)
 end
 
 ---------------------------
