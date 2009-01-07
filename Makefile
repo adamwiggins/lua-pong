@@ -1,12 +1,12 @@
-BIN=pong
+BIN=engine
 TESTBIN=test
 
-run: pong
-	./pong
+pong: engine
+	./engine pong.lua
 
-pong: pong.c Makefile
+engine: engine.c Makefile
 	clear
-	cc pong.c -llua -llualib `pkg-config sdl --libs --cflags` -framework OpenGL -I/opt/local/include -o $(BIN)
+	cc engine.c -llua -llualib `pkg-config sdl --libs --cflags` -framework OpenGL -I/opt/local/include -o $(BIN)
 
 test: buildtest
 	clear

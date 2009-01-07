@@ -59,8 +59,13 @@ void pulse_via_lua()
 	}
 }
 
-int main(int argc, char*argv[])
+int main(int argc, char *argv[])
 {
+	if (argc < 2) {
+		printf("usage: engine [script.lua]\n");
+		exit(1);
+	}
+
 	L = lua_open();
 	luaopen_base(L);
 	luaopen_table(L);
@@ -91,7 +96,11 @@ int main(int argc, char*argv[])
 	glMatrixMode(GL_PROJECTION);
 	glMatrixMode(GL_MODELVIEW);
 
-	FILE *fp = fopen("pong.lua", "r");
+	FILE *fp = fopen(argv[1], "r");
+	if (!fp) {
+		printf("no such file as %s\n", argv[1]);
+		exit(1);
+	}
 	char buff[10000];
 	int size = fread(buff, 1, 10000, fp);
 	buff[size] = 0;
