@@ -31,8 +31,6 @@ static int draw_rectangle(lua_State *L)
 	glVertex2f(width, height);
 	glVertex2f(0.0f, height);
 	glEnd();
-
-	SDL_GL_SwapBuffers();
 }
 
 static int key_pressed(int key)
