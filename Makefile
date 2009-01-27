@@ -1,12 +1,18 @@
 BIN=engine
 TESTBIN=test
 
+ifeq ($(findstring /Users,$(HOME)),/Users)
+LIBS=-llua -llualib `pkg-config sdl --libs --cflags` -framework OpenGL -I/opt/local/include
+else
+LIBS=-llua50 -llualib50 `pkg-config sdl --libs --cflags` -lGL -I/usr/include/lua50 -I/usr/include/GL
+endif
+
 pong: engine
 	./engine pong.lua
 
 engine: engine.c Makefile
 	clear
-	cc engine.c -llua -llualib `pkg-config sdl --libs --cflags` -framework OpenGL -I/opt/local/include -o $(BIN)
+	$(CC) engine.c $(LIBS) -o $(BIN)
 
 test: buildtest
 	clear
@@ -14,7 +20,7 @@ test: buildtest
 
 buildtest: test.c Makefile
 	clear
-	cc test.c -llua -llualib `pkg-config sdl --libs --cflags` -framework OpenGL -I/opt/local/include -o $(TESTBIN)
+	$(CC) test.c $(LIBS) -o $(TESTBIN)
 
 clean:
 	rm -f $(BIN) $(TESTBIN)

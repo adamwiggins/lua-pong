@@ -1,5 +1,5 @@
 #include <SDL.h>
-#include <OpenGL/gl.h>
+#include <gl.h>
 #include <lua.h>
 #include <lauxlib.h>
 
