@@ -1,0 +1,4 @@
+= Lua Pong
+
+See http://adam.blog.heroku.com/past/2009/1/27/lua_the_embeddable_game_scripting_language/
+
