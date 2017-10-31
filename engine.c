@@ -100,7 +100,7 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 	char buff[10000];
-	int size = fread(buff, 1, 10000, fp);
+        int size = fread(buff, 1, sizeof(buff)-1, fp);
 	buff[size] = 0;
 	fclose(fp);
 
